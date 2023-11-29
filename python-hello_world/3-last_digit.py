@@ -13,4 +13,5 @@ if lastnumber < 6 and lastnumber == 0:
     print("Last digit of",number, "is", lastnumber, "and is 0")
 
 if lastnumber < 6:
-    print("Last digit of", '-',number, "is", lastnumber, "and is less than 6 and not 0")
+    negative = lastnumber * -1
+    print("Last digit of",number, "is", negative, "and is less than 6 and not 0")
