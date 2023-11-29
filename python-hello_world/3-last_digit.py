@@ -9,7 +9,7 @@ text = "Last digit of "
 if lastnumber > 5:
     print(str(text), number, "is", lastnumber, "and is greater than 5")
 
-if lastnumber == 0:
+if lastnumber < 6 and lastnumber == 0:
     print(str(text), number, "is", lastnumber, "and is 0")
 
 if lastnumber < 6:
