@@ -4,4 +4,4 @@ for first_digit in range(10):
             print("{:02d}, ".format(first_digit * 10 + second_digit), end="")
 
         else:
-            print("{:02d} ".format(first_digit * 10 + second_digit), end="")
+            print("{:02d}".format(first_digit * 10 + second_digit), end="")
