@@ -1,2 +1,2 @@
 for num in range(99):
-    print(num,"=", hex(num))
+    print(f"{num}, = {hex(num)}")
