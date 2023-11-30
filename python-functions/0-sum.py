@@ -1,6 +1,6 @@
 def add():
-    a = 2
-    b = 1
+    a = int ()
+    b = int()
     return a+b
 
 print(add())
