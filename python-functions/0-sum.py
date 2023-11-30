@@ -1,5 +1,6 @@
-add = __import__('0-sum').add
+def add():
+    a = int(input("Enter first number: "))
+    b = int(input("Enter second number: "))
+    print(str("The sum is: "),a+b)
 
-print(add(1, 2))
-print(add(98, 0))
-print(add(100, -2))
+add()
