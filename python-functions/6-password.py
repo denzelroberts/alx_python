@@ -5,5 +5,3 @@ def validate_password(password):
     
     else:
         return False
-    
-print(validate_password("Password1"))
