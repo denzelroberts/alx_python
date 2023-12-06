@@ -4,9 +4,9 @@ def print_matrix_integer(matrix=[[]]):
         # Loop over each column in the current row
         for j in range(len(matrix[i])):
             # Print element at row i, column j
-            print("{:d} ".format(matrix[i][j]),end="")
+            print("{:d} ".format(matrix[i][j]),end='')
         # Print a new line after each row
-        print()
+        print("")
     return matrix
 
 matrix = [
@@ -15,4 +15,4 @@ matrix = [
     [7, 8, 9]
 ]
 
-#print_matrix_integer(matrix)
+print_matrix_integer(matrix)
