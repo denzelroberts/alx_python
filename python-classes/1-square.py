@@ -6,8 +6,9 @@ class Square:
         The initialization of size
         """
         self.__size = size
+
         try:
-            size = int()
+            type.size = int()
         except TypeError:
             print("size must be an integer")
 
