@@ -8,10 +8,9 @@ class Square:
         self.__size = size
 
         try:
-            type.size = int()
+            size = int()
         except TypeError:
             print("size must be an integer")
-
         
         try:
             size < 0
