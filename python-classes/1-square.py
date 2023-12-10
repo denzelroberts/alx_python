@@ -7,7 +7,7 @@ class Square:
         """
         self.__size = size
         try:
-            size = input(int())
+            size = int()
         except TypeError:
             print("size must be an integer")
 
