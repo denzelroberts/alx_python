@@ -1,8 +1,7 @@
-__import__("my_module").__doc__
+"""This is size of a square"""
 class Square:
-    """
-    This a square class
-    """
-    
-    __import__("my_module").MyClass.__doc__
-    __size = ()
+    def __init__(self, size) -> None:
+        """
+        The initialization of size
+        """
+        self.size = size
