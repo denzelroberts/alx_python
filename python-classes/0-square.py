@@ -5,4 +5,4 @@ class Square:
         """
         The initialization of size
         """
-        self.size = size
+        self.__size = size
