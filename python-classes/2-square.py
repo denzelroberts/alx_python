@@ -21,3 +21,11 @@ class Square:
         """
         # self ** 2
         return self.__size ** 2
+
+    @property
+    def size(self):
+        return self.size
+    
+    @property.setter
+    def size(self, value):
+        self.size = value
