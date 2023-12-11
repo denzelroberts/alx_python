@@ -19,23 +19,16 @@ class Square:
         """
         area of size
         """
-        # self ** 2
         return self.__size ** 2
 
-    @property
-    """
-    getter module
-    """
+    @property 
     def size(self):
         """
         getter
         """
         return self.size
     
-    @property.setter
-    """
-    setter module
-    """
+    @size.setter
     def size(self, value):
         """
         setter
