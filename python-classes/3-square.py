@@ -33,4 +33,4 @@ class Square:
         """
         setter
         """
-        self.__size = value
+        self.__size = int(value)
