@@ -1,7 +1,4 @@
 """This is size of a square"""
-import sys
-
-
 class Square:
     """class of the size of the square"""
     def __init__(self, size=0):
@@ -49,5 +46,5 @@ class Square:
         else:
             for i in range(self.__size):
                 for j in range(self.__size):
-                        sys.stdout.write("#")
-                sys.stdout.write("\n")
+                        print("#")
+                print("\n")
