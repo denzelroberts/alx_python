@@ -33,4 +33,9 @@ class Square:
         """
         setter
         """
-        self.__size = int(value)
+        self.__size = value
+        if type(value) == int:
+            value
+        else:
+            raise TypeError("size must be an integer")
+        
