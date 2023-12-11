@@ -16,5 +16,8 @@ class Square:
             raise ValueError("size must be >= 0")
         
     def area(self):
-        self ** 2
-        return self
+        """
+        area of size
+        """
+        # self ** 2
+        return self.__size ** 2
