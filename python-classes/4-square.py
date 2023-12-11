@@ -44,5 +44,5 @@ class Square:
             print("")
 
         else:
-            for i in range(self.__size):
-                print("#"**2)
+            for i in range(self.area):
+                print("#")
