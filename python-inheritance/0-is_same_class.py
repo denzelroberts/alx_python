@@ -10,5 +10,5 @@ class obj:
 
 def is_same_class(obj, a_class):
     """This is size of a function"""
-    if obj() == a_class():
-        return True
+    same_class = isinstance(obj, a_class)
+    return same_class
