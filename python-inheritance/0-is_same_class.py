@@ -1,21 +1,20 @@
 """This is size of a class"""
 class a_class:
     """This is size of a method"""
-    def __init__(self,a):
-        """This is size of a function"""
-        self.a = a
-        pass
+    pass
 
 """This is size of a class"""
-class obj(a_class):
+class obj:
     """This is size of a method"""
-    def __init__(self,a):
-        super.__init__(a)
+    pass
 
 def is_same_class(obj, a_class):
     """This is size of a function"""
     return isinstance(obj, a_class)
 
+    
+    # elif isinstance(obj, a_class) == False:
+    #     return False
     
 a = 1
 if is_same_class(a, int):
