@@ -1,10 +1,12 @@
 """This is size of a function"""
 def is_same_class(obj, a_class):
     """This is size of a function"""
-    if type(obj) == type(a_class()):
-        return True
-    elif isinstance(obj, a_class) == isinstance(obj, a_class):
-        return False
+    # if type(obj) == type(a_class()):
+    #     return True
+    # elif isinstance(obj, a_class) == isinstance(obj, a_class):
+    #     return False
+
+    return type(obj) == type(a_class())
 
 # a = 1
 # if is_same_class(a, int):
