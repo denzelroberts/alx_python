@@ -2,7 +2,7 @@
 def is_same_class(obj, a_class):
     """This is size of a function"""
     # return type(obj) == type(a_class())
-    return isinstance(obj, a_class) == isinstance(obj, a_class)
+    return isinstance(obj, a_class)
 
 a = 1
 if is_same_class(a, int):
