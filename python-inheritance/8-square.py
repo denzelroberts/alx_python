@@ -42,6 +42,8 @@
 
 #     def area(self):
 #         return self.__size * self.__size
+""" module 10-square contains subclass Square
+which inherits from class Rectangle """
 
 Rectangle = __import__('7-rectangle').Rectangle
 
