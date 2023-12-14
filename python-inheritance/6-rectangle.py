@@ -12,14 +12,14 @@ class BaseGeometry:
         if value <= 0:
             raise ValueError("{} must be greater than 0".format(name))
         
-"""This is a class"""        
-class Rectangle(BaseGeometry):
-    """These are the attributes"""
-    def __init__(self, width, height):
-        """validate that"""
-        self.integer_validator("width", width)
-        self.integer_validator("height", height)
+        """This is a class"""        
+        class Rectangle(BaseGeometry):
+            """These are the attributes"""
+            def __init__(self, width, height):
+                """validate that"""
+                self.integer_validator("width", width)
+                self.integer_validator("height", height)
 
-        """privatize"""
-        self.__width = width
-        self.__height = height
+                """privatize"""
+                self.__width = width
+                self.__height = height
