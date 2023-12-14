@@ -1,3 +1,4 @@
+"""This is size of a function"""
 class a_class:
     pass
 
