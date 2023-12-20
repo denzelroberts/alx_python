@@ -1,5 +1,6 @@
 '''  sends a POST request to passed URL and displays response  '''
 import requests
+import sys
 from sys import argv
 
 if __name__ == "__main__":
