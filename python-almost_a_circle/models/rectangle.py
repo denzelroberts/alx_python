@@ -71,3 +71,41 @@ class Rectangle(Base):
     def area(self):
         """ returns area of rectangle """
         return self.__width * self.__height
+    
+    #Display 0
+    def display(self):
+        """ print with '#' """
+         # Display 1
+        print("\n" * self.y, end="")
+        for i in range(self.height):
+            print(" " * self.x, end="")
+            print("#" * self.width)
+
+    #__str__
+    def __str__(self):
+        """ prints string"""
+        return "[Rectangle] ({:d}) {:d}/{:d} - {:d}/{:d}"\
+            .format(self.id, self.x, self.y, self.width, self.height)
+           
+    
+    #Update #0
+    def update(self, *args, **kwargs):
+        """ updating rectangle """
+        if len(args) != 0:
+            i = 0
+            rect_attrs = ["id", "width", "height", "x", "y"]
+            for arg in args:
+                setattr(self, rect_attrs[i], args[i])
+                i += 1
+        else:
+            for k, v in kwargs.items():
+                setattr(self, k, v)
+
+    def to_dictionary(self):
+        """ returns dictionary representation of rectangle """
+        rect_dict = {}
+        rect_attrs = ["id", "width", "height", "x", "y"]
+        for attr in rect_attrs:
+            rect_dict[attr] = getattr(self, attr)
+        return rect_dict
+
