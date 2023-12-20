@@ -1,17 +1,11 @@
-'''  takes in a url, sends a request, and displays the response '''
-
+"""CHECK"""
 import requests
 import sys
-import urllib.request as request
-import urllib.error as error
-from sys import argv
 
+url = sys.argv[1]
+response = requests.get(url)
 
-if __name__ == "__main__":
-    url = argv[1]
-    req = request.Request(url)
-    try:
-        with request.urlopen(req) as response:
-            print(response.read().decode('utf-8'))
-    except error.HTTPError as err:
-        print("Error code: {}".format(err.code))
+if response.status_code >= 400:
+    print("Error code:", response.status_code)
+else:
+    print(response.text)
