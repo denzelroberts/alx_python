@@ -2,7 +2,7 @@
 import requests
 import sys
 from sys import argv
-from urllib import parse
+from requests import parse
 
 if __name__ == "__main__":
     url = argv[1]
