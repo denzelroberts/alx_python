@@ -2,11 +2,12 @@
 import requests
 import sys
 from sys import argv
+import parse
 
 if __name__ == "__main__":
     url = argv[1]
     data = {'email' : argv[2]}
-    data = argv.urlencode(data)
+    data = parse.urlencode(data)
     data = data.encode('ascii')
     req = requests.Request(url, data)
     with requests.urlopen(req) as res:
