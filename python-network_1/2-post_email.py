@@ -1,4 +1,6 @@
 '''  sends a POST request to passed URL and displays response  '''
+import requests
+import sys
 import urllib.request as request
 import urllib.parse as parse
 from sys import argv
