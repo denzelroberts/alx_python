@@ -1,7 +1,7 @@
 '''  sends a POST request to passed URL and displays response  '''
 import requests
 import sys
-import urllib.request as request
+import urllib.request as requests
 import urllib.parse as parse
 from sys import argv
 
@@ -10,6 +10,6 @@ if __name__ == "__main__":
     data = {'email' : argv[2]}
     data = parse.urlencode(data)
     data = data.encode('ascii')
-    req = request.Request(url, data)
-    with request.urlopen(req) as res:
+    req = requests.Request(url, data)
+    with requests.urlopen(req) as res:
         print(res.read().decode('utf-8'))
