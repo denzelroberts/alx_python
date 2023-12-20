@@ -1,6 +1,7 @@
 '''  takes in a url, sends a request, and displays the response '''
 
-
+import requests
+import sys
 import urllib.request as request
 import urllib.error as error
 from sys import argv
