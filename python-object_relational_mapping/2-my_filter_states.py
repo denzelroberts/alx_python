@@ -3,7 +3,7 @@ import MySQLdb
 from sys import argv
 
 #connecting to mysqldb
-db = MySQLdb.connect(user=argv[1], passwd=argv[2], db=argv[3], search=argv[4])
+db = MySQLdb.connect(user=argv[1], passwd=argv[2], db=argv[3])
 
 #getting a cursor 
 cur = db.cursor()
