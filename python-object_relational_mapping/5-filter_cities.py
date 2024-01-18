@@ -20,8 +20,8 @@ first = 0
 for city in myresult:
     if first != 0:
         print(", ", end="")
-print("%s" % city, end="")
-first += 1
+        print("%s" % city, end="")
+        first += 1
 
 print("")
 # Close all cursors
