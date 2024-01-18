@@ -8,7 +8,7 @@ db = MySQLdb.connect(user=argv[1], passwd=argv[2], db=argv[3])
 #getting a cursor 
 cur = db.cursor()
 
-cur.execute("SELECT * from cities ORDER BY states.id ASC")
+cur.execute("SELECT * from cities ORDER BY cities.id ASC")
 
 myresult = cur.fetchall()
 
