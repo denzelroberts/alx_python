@@ -10,10 +10,11 @@ engine = create_engine(path.format(argv[1], argv[2], argv[3]))
 Session = sessionmaker(bind = engine)
 session = Session()
 
-if session.query(State).order_by(State.id).all():
+states 
+if session.query(State).order_by(State.id).first():
     print("{}: {}".format(State.id, State.name))
 
 else:
     print("Nothing")
-    
+
 session.close()
