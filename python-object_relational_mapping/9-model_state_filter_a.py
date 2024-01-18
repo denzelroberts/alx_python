@@ -12,7 +12,8 @@ session = Session()
 
 states = session.query(State).order_by(State.id).first()
 
-for states in session.query(State).filter(State.name.contains('a')).order_by(State.id).all():
+filter = session.query(State).filter(State.name.contains('a')).order_by(State.id).all()
+for states in filter:
     print("{}: {}".format(states.id, states.name))
 
 session.close()
