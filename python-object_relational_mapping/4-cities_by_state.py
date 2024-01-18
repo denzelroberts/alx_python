@@ -8,12 +8,13 @@ db = MySQLdb.connect(user=argv[1], passwd=argv[2], db=argv[3])
 #getting a cursor 
 cur = db.cursor()
 
-cur.execute("SELECT * from cities ORDER BY cities.id ASC")
+cur.execute("SELECT cities id, cities.name, states.name FROM cities\
+            INNER JOIN states ON states.id ORDER BY cities.id")
 
 myresult = cur.fetchall()
 
-for state in myresult:
-  print(state)
+for city in myresult:
+  print(city)
 
 
 # Close all cursors
