@@ -17,8 +17,8 @@ def ceee(text):
     text = escape(text).replace("_"," ")
     return "C {}".format(text)
 
-@app.route('/python/<is cool>',strict_slashes=False)
-def py(text):
+@app.route('/python/<text>',strict_slashes=False)
+def py(text = "is cool"):
     text = escape(text).replace("_"," ")
     return "Python {}".format(text)
 
