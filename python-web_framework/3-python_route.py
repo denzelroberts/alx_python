@@ -18,8 +18,8 @@ def ceee(text):
     return "C {}".format(text)
 
 @app.route('/python/<text>',strict_slashes=False)
-def py(text):
-    text = escape(text("is cool")).replace("_"," ")
+def py(text='is cool'):
+    text = escape(text).replace("_"," ")
     return "Python {}".format(text)
 
 if __name__ == "__main__":
