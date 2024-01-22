@@ -21,6 +21,7 @@ def ceee(text):
 def py(text='is cool'):
     return "Python {}".format(text.replace("_"," "))
 
+'''documented'''
 @app.route('/number/', strict_slashes=False)
 @app.route('/number/<n>', strict_slashes=False)
 def py(n):
