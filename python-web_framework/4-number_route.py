@@ -1,4 +1,4 @@
-'''raghhman'''
+#raghhman'''
 from flask import Flask
 from markupsafe import escape
 
@@ -33,5 +33,6 @@ def py(n):
     if n == int:
         return "{} is a number".format(n)
 
+'''documented'''
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
