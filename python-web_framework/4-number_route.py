@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 '''Importing Flask form flask'''
 from flask import Flask
-from markupsafe import escape
 
 app = Flask(__name__)
 
