@@ -16,14 +16,14 @@ def hbnb():
 def ceee(text):
     return "C {}".format(text.replace("_"," "))
 
-#@app.route('/python/', strict_slashes=False)
+@app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def py(text='is cool'):
     return "Python {}".format(text.replace("_"," "))
 
 @app.route('/number/', strict_slashes=False)
 @app.route('/number/<int:n>', strict_slashes=False)
-def py(n):
+def number(n):
     if n == int:
         return "{} is a number".format(n)
 
