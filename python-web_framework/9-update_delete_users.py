@@ -76,7 +76,7 @@ def delete_user(user_id):
         flash("User deleted successfully!", 'success')
         return redirect('/')
     
-    return render_template('delete_user.html', user=user)
+    return render_template('delete_user.html', 'update_user.html' user=user)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
