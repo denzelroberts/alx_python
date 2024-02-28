@@ -17,7 +17,7 @@ def get_employee_todo_progress(employee_id):
         total_tasks = len(todos_data)
         done_tasks = sum(1 for task in todos_data if task["completed"])
 
-        print(f"Employee {employee_name} is done with tasks ({done_tasks}/{total_tasks}):")
+        print(f"Employee {employee_name} is done with tasks({done_tasks}/{total_tasks}):")
         for task in todos_data:
             if task["completed"]:
                 print(f"\t{task['title']}")
