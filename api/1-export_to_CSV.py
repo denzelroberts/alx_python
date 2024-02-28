@@ -19,9 +19,9 @@ def get_employee_todo_progress(employee_id):
 
         # Create a CSV file with the employee's ID as the filename
         filename = {user_id}+".csv"
-        with open(filename, mode="w", newline="") as csvfile:
+        with open(filename, 'r') as f:
             fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
 
             for task in todos_data:
