@@ -25,7 +25,7 @@ def get_employee_todo_progress(employee_id):
             writer.writeheader()
 
             for task in todos_data:
-                task_id = task["id"]
+                #task_id = task["id"]
                 task_title = task["title"]
                 task_completed = task["completed"]
 
