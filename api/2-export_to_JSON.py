@@ -1,57 +1,55 @@
-'''importing libraries'''
-"""importing libraries"""
-# iimporting libraries
+""" Using what you did in the task #0, extend your Python script to export data in the JSON format.
+
+Requirements:
+
+Records all tasks from all employees
+Format must be: { "USER_ID": [ {"username": "USERNAME", "task": "TASK_TITLE", "completed": TASK_COMPLETED_STATUS}, {"username": "USERNAME", "task": "TASK_TITLE", "completed": TASK_COMPLETED_STATUS}, ... ], "USER_ID": [ {"username": "USERNAME", "task": "TASK_TITLE", "completed": TASK_COMPLETED_STATUS}, {"username": "USERNAME", "task": "TASK_TITLE", "completed": TASK_COMPLETED_STATUS}, ... ]}
+File name must be: todo_all_employees.json """
 
 import json
 import requests
 import sys
 
 
-# defining our first function
-def get_employee_todo_progress(employee_id):
-    base_url = "https://jsonplaceholder.typicode.com"
-    user_url = f"{base_url}/users/{employee_id}"
-    todos_url = f"{base_url}/users/{employee_id}/todos"
+def get_user_data(user_id):
+    url = "https://jsonplaceholder.typicode.com/"
+    user_url = "{}users/{}".format(url, user_id)
+    response = requests.get(user_url)
+    return response.json()
 
-    try:
-        user_response = requests.get(user_url)
-        todos_response = requests.get(todos_url)
 
-        user_data = user_response.json()
-        todos_data = todos_response.json()
+def get_user_tasks(user_id):
+    url = "https://jsonplaceholder.typicode.com/"
+    todos_url = "{}todos?userId={}".format(url, user_id)
+    response = requests.get(todos_url)
+    return response.json()
 
-        employee_name = user_data["name"]
-        total_tasks = len(todos_data)
-        done_tasks = sum(1 for task in todos_data if task["completed"])
 
-        # Create a dictionary to store the tasks
-        tasks_dict = {
-            "USER_ID": [
-                {
-                    "task": task["title"],
-                    "completed": task["completed"],
-                    "username": user_data["username"]
-                }
-                for task in todos_data if task["completed"]
-            ]
+def export_to_json(user_id, user_data, tasks):
+    l_task = []
+    for task in tasks:
+        dict_task = {
+            "task": task.get("title"),
+            "completed": task.get("completed"),
+            "username": user_data.get("username"),
         }
+        l_task.append(dict_task)
 
-        # Write the dictionary to a JSON file
-        filename = f"{employee_id}.json"
-        with open(filename, "w", encoding="utf-8") as json_file:
-            json.dump(tasks_dict, json_file, ensure_ascii=False, indent=4)
+    d_task = {str(user_id): l_task}
+    filename = "{}.json".format(user_id)
 
-        print(f"Employee {employee_name} is done with tasks ({done_tasks}/{total_tasks}).")
-        print(f"Data exported to {filename}")
+    with open(filename, "w") as json_file:
+        json.dump(d_task, json_file, indent=2)
 
-    except requests.RequestException as e:
-        print(f"Error fetching data: {e}")
-        sys.exit(1)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
+    if len(sys.argv) != 2 or not sys.argv[1].isdigit():
         print("Usage: python script.py <employee_id>")
         sys.exit(1)
 
-    employee_id = int(sys.argv[1])
-    get_employee_todo_progress(employee_id)
+    user_id = int(sys.argv[1])
+
+    user_data = get_user_data(user_id)
+    user_tasks = get_user_tasks(user_id)
+
+    export_to_json(user_id, user_data, user_tasks)
