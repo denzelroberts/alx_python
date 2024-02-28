@@ -19,9 +19,9 @@ def get_employee_todo_progress(employee_id):
 
         # Create a CSV file with the employee's ID as the filename
         filename = {user_id}+".csv"
-        with open(filename, 'r') as f:
+        with open(filename, mode="w", newline="") as csvfile:
             fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
-            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             writer.writeheader()
 
             for task in todos_data:
@@ -42,10 +42,10 @@ def get_employee_todo_progress(employee_id):
         print(f"Error fetching data: {e}")
         sys.exit(1)
 
-if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python script.py <employee_id>")
-        sys.exit(1)
+# if __name__ == "__main__":
+#     if len(sys.argv) != 2:
+#         print("Usage: python script.py <employee_id>")
+#         sys.exit(1)
 
-    employee_id = int(sys.argv[1])
-    get_employee_todo_progress(employee_id)
+#     employee_id = int(sys.argv[1])
+#     get_employee_todo_progress(employee_id)
