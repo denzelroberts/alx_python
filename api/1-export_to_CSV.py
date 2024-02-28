@@ -1,51 +1,81 @@
+""" Using what you did in the task #0, extend your Python script to export data in the CSV format.
+
+Requirements:
+
+Records all tasks that are owned by this employee
+Format must be: "USER_ID","USERNAME","TASK_COMPLETED_STATUS","TASK_TITLE"
+File name must be: USER_ID.csv """
+
 import csv
 import requests
 import sys
 
-def get_employee_todo_progress(employee_id):
-    base_url = "https://jsonplaceholder.typicode.com"
-    user_url = f"{base_url}/users/{employee_id}"
-    todos_url = f"{base_url}/users/{employee_id}/todos"
 
-    try:
-        user_response = requests.get(user_url)
-        todos_response = requests.get(todos_url)
+def get_user_data(user_id):
+    url = "https://jsonplaceholder.typicode.com/"
+    user_url = "{}users/{}".format(url, user_id)
+    response = requests.get(user_url)
+    return response.json()
 
-        user_data = user_response.json()
-        todos_data = todos_response.json()
 
-        employee_name = user_data["name"]
-        user_id = user_data["id"]
+def get_user_tasks(user_id):
+    url = "https://jsonplaceholder.typicode.com/"
+    todos_url = "{}todos?userId={}".format(url, user_id)
+    response = requests.get(todos_url)
+    return response.json()
 
-        # Create a CSV file with the employee's ID as the filename
-        filename = {user_id}+".csv"
-        with open(filename, mode="w", newline="") as csvfile:
-            fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            writer.writeheader()
 
-            for task in todos_data:
-                #task_id = task["id"]
-                task_title = task["title"]
-                task_completed = task["completed"]
+def display_user_progress(user_data, tasks):
+    print("Employee {} is done with tasks".format(user_data.get("name")), end="")
 
-                writer.writerow({
-                    "USER_ID": user_id,
-                    "USERNAME": employee_name,
-                    "TASK_COMPLETED_STATUS": "Completed" if task_completed else "Not Completed",
-                    "TASK_TITLE": task_title
-                })
+    completed_tasks = [task for task in tasks if task.get("completed")]
 
-        print(f"Data exported to {filename} successfully!")
+    print("({}/{}):".format(len(completed_tasks), len(tasks)))
 
-    except requests.RequestException as e:
-        print(f"Error fetching data: {e}")
+    for task in completed_tasks:
+        print("\t {}".format(task.get("title")))
+
+
+def export_to_csv(user_id, user_data, tasks):
+    filename = "{}.csv".format(user_id)
+
+    with open(filename, "w", newline="") as csvfile:
+        fieldnames = ["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"]
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        for task in tasks:
+            writer.writerow(
+                {
+                    "USER_ID": user_data.get("id"),
+                    "USERNAME": user_data.get("username"),
+                    "TASK_COMPLETED_STATUS": str(task.get("completed")),
+                    "TASK_TITLE": task.get("title"),
+                }
+            )
+
+
+def record_and_export(user_id):
+    user_data = get_user_data(user_id)
+    if not user_data:
+        print(f"Error: User not found for ID {user_id}")
         sys.exit(1)
 
-# if __name__ == "__main__":
-#     if len(sys.argv) != 2:
-#         print("Usage: python script.py <employee_id>")
-#         sys.exit(1)
+    user_tasks = get_user_tasks(user_id)
 
-#     employee_id = int(sys.argv[1])
-#     get_employee_todo_progress(employee_id)
+    display_user_progress(user_data, user_tasks)
+
+    try:
+        export_to_csv(user_id, user_data, user_tasks)
+        print("Export to CSV: Success")
+    except Exception as e:
+        print(f"Export to CSV: Error - {e}")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2 or not sys.argv[1].isdigit():
+        print("Usage: python script.py <employee_id>")
+        sys.exit(1)
+
+    user_id = int(sys.argv[1])
+    record_and_export(user_id)
