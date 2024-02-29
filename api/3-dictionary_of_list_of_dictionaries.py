@@ -1,45 +1,39 @@
-""" COMMENTING """
+#!/usr/bin/python3
 
+"""
+Python script that exports data in the JSON format.
+"""
+
+from requests import get
 import json
-import requests
-import sys
-
-
-def get_user_data(user_id):
-    url = "https://jsonplaceholder.typicode.com/"
-    user_url = "{}users/{}".format(url, user_id)
-    response = requests.get(user_url)
-    return response.json()
-
-
-def get_user_tasks(user_id):
-    url = "https://jsonplaceholder.typicode.com/"
-    todos_url = "{}todos?userId={}".format(url, user_id)
-    response = requests.get(todos_url)
-    return response.json()
-
-
-def export_all_to_json():
-    all_tasks = {}
-    for user_id in range(1, 11):  # Assuming user IDs range from 1 to 10
-        user_data = get_user_data(user_id)
-        user_tasks = get_user_tasks(user_id)
-
-        l_task = []
-        for task in user_tasks:
-            dict_task = {
-                "username": user_data.get("username"),
-                "task": task.get("title"),
-                "completed": task.get("completed"),
-            }
-            l_task.append(dict_task)
-
-        all_tasks[str(user_id)] = l_task
-
-    filename = "todo_all_employees.json"
-    with open(filename, "w") as json_file:
-        json.dump(all_tasks, json_file, indent=2)
-
 
 if __name__ == "__main__":
-    export_all_to_json()
+    response = get('https://jsonplaceholder.typicode.com/todos/')
+    data = response.json()
+
+    row = []
+    response2 = get('https://jsonplaceholder.typicode.com/users')
+    data2 = response2.json()
+
+    new_dict1 = {}
+
+    for j in data2:
+
+        row = []
+        for i in data:
+
+            new_dict2 = {}
+
+            if j['id'] == i['userId']:
+
+                new_dict2['username'] = j['username']
+                new_dict2['task'] = i['title']
+                new_dict2['completed'] = i['completed']
+                row.append(new_dict2)
+
+        new_dict1[j['id']] = row
+
+    with open("todo_all_employees.json",  "w") as f:
+
+        json_obj = json.dumps(new_dict1)
+        f.write(json_obj)
