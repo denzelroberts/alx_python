@@ -1,41 +1,40 @@
-#!/usr/bin/python3
+"""import libraries alphabetically"""
+import csv
+import requests
+import sys
 
-"""
-Python script that exports data in the JSON format.
-"""
+"""Create a function to retrieve data"""
+def getData(id):
+    """
+    Data from json API
+    """
+    usersurl = "https://jsonplaceholder.typicode.com/users/{}".format(id)
+    todourl = "{}/todos".format(usersurl)
 
-from requests import get
-from sys import argv
-import json
+    request1 = requests.get(usersurl)
+    results = request1.json()
+    userid = results['id']
+    username = results['username']
+
+    request2 = requests.get(todourl)
+    tasks = request2.json()
+
+    alldata = {}
+
+    jsondata = [
+            {"task": task['title'], "completed": task['completed'], "username": username}
+            for task in tasks
+        ]
+    
+    alldata[str(userid)] = jsondata
+
+    with open("{}.json".format(userid), "w") as jsonfile:
+        json.dump(alldata, jsonfile)
+
 
 if __name__ == "__main__":
-    response = get('https://jsonplaceholder.typicode.com/todos/')
-    data = response.json()
-
-    row = []
-    response2 = get('https://jsonplaceholder.typicode.com/users')
-    data2 = response2.json()
-
-    for i in data2:
-        if i['id'] == int(argv[1]):
-            u_name = i['username']
-            id_no = i['id']
-
-    row = []
-
-    for i in data:
-
-        new_dict = {}
-
-        if i['userId'] == int(argv[1]):
-            new_dict['username'] = u_name
-            new_dict['task'] = i['title']
-            new_dict['completed'] = i['completed']
-            row.append(new_dict)
-
-    final_dict = {}
-    final_dict[id_no] = row
-    json_obj = json.dumps(final_dict)
-
-    with open(argv[1] + ".json",  "w") as f:
-        f.write(json_obj)
+    if len(sys.argv) > 1:
+        id = sys.argv[1]
+    else:
+        id = 1
+    getData(int(id))
