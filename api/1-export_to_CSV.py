@@ -1,12 +1,12 @@
-"""import json, requests, sys"""
+"""import libraries alphabetically"""
 import csv
 import requests
 import sys
-"""import json, requests, sys"""
 
+"""Create a function to retrieve data"""
 def getData(id):
     """
-    Get data from json api and export to json file
+    Data from json API
     """
     usersurl = "https://jsonplaceholder.typicode.com/users/{}".format(id)
     todourl = "{}/todos".format(usersurl)
