@@ -1,33 +1,32 @@
-#!/usr/bin/python3
-"""A python script that,  using Rest Api, for
-a given employee ID, returns information about
-his/her TODO list program
-"""
-from requests import get
-from sys import argv
+"""import json, requests, sys"""
+import csv
+import requests
+import sys
+"""import json, requests, sys"""
+
+def getData(id):
+    """
+    Get data from json api and export to json file
+    """
+    usersurl = "https://jsonplaceholder.typicode.com/users/{}".format(id)
+    todourl = "{}/todos".format(usersurl)
+
+    request1 = requests.get(usersurl)
+    result = request1.json()
+    userid = result['id']
+    username = result['username']
+
+    request2 = requests.get(todourl)
+    tasks = request2.json()
+
+    with open("{}.csv".format(userid), "w", newline='') as csvfile:
+        writer = csv.writer(csvfile, quoting = csv.QUOTE_ALL)
+        for task in tasks:
+            writer.writerow([userid, username, task['completed'], task['title']])
 
 if __name__ == "__main__":
-    response = get('https://jsonplaceholder.typicode.com/todos/')
-    data = response.json()
-    completed = 0
-    total = 0
-    tasks = []
-    response2 = get('https://jsonplaceholder.typicode.com/users')
-    data2 = response2.json()
-    employee = ""
-
-    for i in data2:
-        if i.get('id') == int(argv[1]):
-            employee = i.get('name')
-
-            for i in data:
-                if i.get('userId') == int(argv[1]):
-                    total += 1
-                    if i.get('completed') is True:
-                        completed += 1
-                        tasks.append(i.get('title'))
-            print("Employee {} is done with tasks({}/{}):".format
-                  (employee, completed, total))
-
-            for i in tasks:
-                print("\t {}".format(i))
+    if len(sys.argv) > 1:
+        id = sys.argv[1]
+    else:
+        id = 1
+    getData(str(id))
